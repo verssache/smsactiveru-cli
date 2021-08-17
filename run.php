@@ -48,6 +48,12 @@ if ($tools == 1) {
                 }
             } while (strlen($code) !== 4);
             echo color('green', "\n[+]")." OTP [$code]\n";
+            echo color('blue', "[+]")." Apakah sudah selesai? (y/n): ";
+            $yn = trim(fgets(STDIN));
+            if ($yn == "y") {
+                $status = $sms->setStatus($id,6);
+                echo color('green', "[+]")." Terima kasih!\n";
+            }
         } else {
             echo color('red', "Nomor telah terdaftar!\n");
             $status = $sms->setStatus($id,8);
