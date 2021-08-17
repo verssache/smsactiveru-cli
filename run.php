@@ -21,6 +21,7 @@ if ($tools == 1) {
     echo color('green', "[+]")." Sisa saldo: $saldo ₽\n";
 } else if ($tools == 2) {
     echo color('blue', "[+]")." Order Nomer Gojek (Indosat Ooredoo)\n";
+    Start:
     $getnum = $sms->getNumber("ni",6,0,"indosat");
     if (is_array($getnum)) {
         $id = $getnum["id"];
@@ -36,6 +37,8 @@ if ($tools == 1) {
             echo color('blue', "[+]")." Tekan enter untuk menerima otp..";
             $y = trim(fgets(STDIN));
             $status = $sms->setStatus($id,1);
+            $pin = false;
+            OTP:
             echo color('yellow', "[+]")." Menunggu OTP ";
             $aww = 0;
             do {
@@ -47,16 +50,31 @@ if ($tools == 1) {
                     $aww = 0;
                 }
             } while (strlen($code) !== 4);
+            if ($pin) $code = get_between(base64_decode(json_decode($cek[1])->array[0]->moreSms), 'GoPay. OTP: ', ' gojek.com');
             echo color('green', "\n[+]")." OTP [$code]\n";
-            echo color('blue', "[+]")." Apakah sudah selesai? (y/n): ";
-            $yn = trim(fgets(STDIN));
-            if ($yn == "y") {
-                $status = $sms->setStatus($id,6);
-                echo color('green', "[+]")." Terima kasih!\n";
+            if ($pin == false) {
+                echo color('blue', "[+]")." Mau setpin? (y/n): ";
+                $yn = trim(fgets(STDIN));
+                if ($yn == "n") {
+                    $status = $sms->setStatus($id,6);
+                    echo color('green', "[+]")." Terima kasih!\n";
+                } else {
+                    $status = $sms->setStatus($id,3);
+                    $pin = true;
+                    goto OTP;
+                }
+            } else {
+                echo color('blue', "[+]")." Sudah selesai? (y/n): ";
+                $yn = trim(fgets(STDIN));
+                if ($yn == "y") {
+                    $status = $sms->setStatus($id,6);
+                    echo color('green', "[+]")." Terima kasih!\n";
+                }
             }
         } else {
             echo color('red', "Nomor telah terdaftar!\n");
             $status = $sms->setStatus($id,8);
+            goto Start;
         }
     } else {
         die($getnum);
