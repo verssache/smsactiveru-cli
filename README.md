@@ -1,8 +1,9 @@
-# SMS-Active.ru CLI
+# SMS-Active.ru x GOFOOD
 SMS-Active.ru is a tool reception of messages to one-time numbers, activation of any services by SMS.
 
 ## Features
 - CLI Mode
+- Automatically checks whether the number has been registered with Gojek or not
   
 ## Uses 
 - Receive a sms to activation of any services
