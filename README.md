@@ -2,11 +2,10 @@
 SMS-Active.ru is a tool reception of messages to one-time numbers, activation of any services by SMS.
 
 ## Features
-- CLI Mode
-- Automatically checks whether the number has been registered with Gojek or not
+- Automatically checks whether the number has been registered with gojek or not
   
 ## Uses 
-- Receive a sms to activation of any services
+- Receive a sms to activation of gojek services
    
 ## Installation
 Requires PHP v7+
