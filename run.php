@@ -51,7 +51,7 @@ if ($tools == 1) {
                 }
             } while (strlen($code) !== 4);
             if ($pin) $code = get_between(base64_decode(json_decode($cek[1])->array[0]->moreSms), 'GoPay. OTP: ', ' gojek.com');
-            echo color('green', "\n[+]")." OTP [$code]\n";
+            echo color('green', " [$code]\n");
             if ($pin == false) {
                 echo color('blue', "[+]")." Mau setpin? (y/n): ";
                 $yn = trim(fgets(STDIN));
@@ -64,12 +64,7 @@ if ($tools == 1) {
                     goto OTP;
                 }
             } else {
-                echo color('blue', "[+]")." Sudah selesai? (y/n): ";
-                $yn = trim(fgets(STDIN));
-                if ($yn == "y") {
-                    $status = $sms->setStatus($id,6);
-                    echo color('green', "[+]")." Terima kasih!\n";
-                }
+                $status = $sms->setStatus($id,6);
             }
         } else {
             echo color('red', "Nomor telah terdaftar!\n");
