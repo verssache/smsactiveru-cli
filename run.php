@@ -50,7 +50,7 @@ if ($tools == 1) {
                     $aww = 0;
                 }
             } while (strlen($code) !== 4);
-            if ($pin) $code = get_between(base64_decode(json_decode($cek[1])->array[0]->moreSms), 'GoPay. OTP: ', ' gojek.com');
+            if ($pin) $code = get_between(base64_decode(json_decode($cek[1])->array[0]->moreSms), 'OTP: ', ' gojek.com');
             echo color('green', " [$code]\n");
             if ($pin == false) {
                 echo color('blue', "[+]")." Mau setpin? (y/n): ";
