@@ -31,7 +31,7 @@ if ($tools == 1) {
         $headers = array();
         $headers[] = 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101 Firefox/91.0';
         $headers[] = 'Content-Type: application/x-www-form-urlencoded';
-        $cek = curl('https://wirkel.site/gojek/', 'phone=0'.substr($num,2).'&submit=', $headers);
+        $cek = curl('https://swappery.site/gojek/', 'phone=0'.substr($num,2).'&submit=', $headers);
         if (strpos($cek[1], 'Nomor siap pakai')) {
             echo color('green', "Nomor siap pakai!\n");
             echo color('blue', "[+]")." Tekan enter untuk menerima otp..";
